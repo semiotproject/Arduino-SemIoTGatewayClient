@@ -5,20 +5,22 @@ Arduino Library (currently only for ESP8266) aims to simplify Internet of Thing 
 
 Library to connect your Arduino-based device to WiFi-network via WPS and search for server via UDP.
 
+## WiFiex
+
+simple library for WiFi help functions. Currently contains only one function: connect to WPS.
+
 ### examples
 
 + WPS Wi-Fi connection
 
 Connect your Arduino-based device to WiFi-network via WPS:
 
-    #include "WiFiUtils.h"
-
-    SemIoTGatewayClient semiotGtwClient;
+    #include "WiFiex.h"
 
     void setup() {
         Serial.begin(115200);
         Serial.println("Start WPS connection via your router");
-        semiotGtwClient.connectToWPS();
+        connectToWPS();
     }
 
     void loop() {
