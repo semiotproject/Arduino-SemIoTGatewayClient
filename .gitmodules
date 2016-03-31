@@ -1,3 +1,6 @@
 [submodule "libraries/EEPROMEx"]
 	path = libraries/EEPROMEx
 	url = https://github.com/thijse/Arduino-EEPROMEx.git
+[submodule "libraries/EnergomeraCE102"]
+	path = libraries/EnergomeraCE102
+	url = https://github.com/semiotproject/Energomera-CE102-lib.git

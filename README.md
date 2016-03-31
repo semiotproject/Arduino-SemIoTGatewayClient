@@ -7,10 +7,14 @@ Library to connect your Arduino-based device to WiFi-network via WPS and search 
 
 ### examples
 
-    + wifi-wps
++ wifi-wps
 
 Connect your Arduino-based device to WiFi-network via WPS
 
 ## EEPROMex
 
 From [https://github.com/thijse/Arduino-EEPROMEx](https://github.com/thijse/Arduino-EEPROMEx)
+
+## Energomera CE102
+
+From [https://github.com/semiotproject/Energomera-CE102-lib.git](https://github.com/semiotproject/Energomera-CE102-lib.git)
