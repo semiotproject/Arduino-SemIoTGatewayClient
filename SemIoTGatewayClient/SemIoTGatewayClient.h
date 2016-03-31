@@ -13,12 +13,15 @@
 class SemIoTGatewayClient
 {
 public:
+    // FIXME: custom func instead of HardwareSerial pointer
+    // (for udp, for example)
     SemIoTGatewayClient(WiFiUDP *udp=NULL, int udpPort = 33333, HardwareSerial *debugSerial=NULL, int debugLedPin = -1);
     ~SemIoTGatewayClient();
     void connectToSemIoTGateway();
     void gtwSearch();
     IPAddress gatewayIp();
     byte *mac();
+    void sendCounters(char *modelWord, unsigned int *counter, bool *counterChanged, bool *needToReconnect);
 private:
     WiFiUDP *_udp;
     int _udpPort;

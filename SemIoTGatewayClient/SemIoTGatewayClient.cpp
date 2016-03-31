@@ -8,6 +8,7 @@ SemIoTGatewayClient::SemIoTGatewayClient(WiFiUDP *udp, int udpPort, HardwareSeri
 {
     if (_debugLedPin>=0) {
         _debugLed = true;
+
     }
     else {
         _debugLed = false;
@@ -81,4 +82,47 @@ IPAddress SemIoTGatewayClient::gatewayIp()
 byte *SemIoTGatewayClient::mac()
 {
     return _mac;
+}
+
+void SemIoTGatewayClient::sendCounters(char *modelWord, unsigned int *counter, bool *counterChanged, bool *needToReconnect)
+{
+    if (*needToReconnect==true) {
+        connectToSemIoTGateway();
+        *needToReconnect = false;
+    }
+    if (*counterChanged) {
+        // FIXME: check for overflow
+        // TODO: writeCountersToEeprom();
+        if (WiFi.status() == WL_CONNECTED) {
+            if (!_udp->beginPacket(_gatewayIp, _udpPort)) {
+                *needToReconnect=true;
+            }
+            _udp->write(modelWord);
+            // TODO: separate to lib:
+            _udp->write((*counter >> 24) & 0xFF);
+            _udp->write((*counter >> 16) & 0xFF);
+            _udp->write((*counter >> 8) & 0xFF);
+            _udp->write((*counter >> 0) & 0xFF);
+            // FIXME: cycle:
+            _udp->write(_mac[0]);
+            _udp->write(_mac[1]);
+            _udp->write(_mac[2]);
+            _udp->write(_mac[3]);
+            _udp->write(_mac[4]);
+            _udp->write(_mac[5]);
+            if (!_udp->endPacket()) {
+                *needToReconnect=true;
+            }
+            if (!*needToReconnect) {
+                *counterChanged=false;
+            }
+            if (_debugSerial) {
+                _debugSerial->print("counter = ");
+                _debugSerial->println(*counter,DEC);
+            }
+        }
+        else {
+            *needToReconnect=true;
+        }
+    }
 }
