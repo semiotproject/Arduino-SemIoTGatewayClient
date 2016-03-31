@@ -11,7 +11,7 @@ Library to connect your Arduino-based device to WiFi-network via WPS and search 
 
 Connect your Arduino-based device to WiFi-network via WPS:
 
-    #include "SemIoTGatewayClient.h"
+    #include "WiFiUtils.h"
 
     SemIoTGatewayClient semiotGtwClient;
 
