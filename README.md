@@ -11,6 +11,6 @@ Library to connect your Arduino-based device to WiFi-network via WPS and search 
 
 Connect your Arduino-based device to WiFi-network via WPS
 
-## EEPROMUtils
+## EEPROMex
 
-`TODO`
+From [https://github.com/thijse/Arduino-EEPROMEx](https://github.com/thijse/Arduino-EEPROMEx)
