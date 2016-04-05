@@ -13,6 +13,7 @@ SemIoTGatewayClient::SemIoTGatewayClient(WiFiUDP *udp, int udpPort, HardwareSeri
     else {
         _debugLed = false;
     }
+    _localUDP = new WiFiUDP();
 }
 
 SemIoTGatewayClient::~SemIoTGatewayClient()
@@ -84,7 +85,7 @@ byte *SemIoTGatewayClient::mac()
     return _mac;
 }
 
-void SemIoTGatewayClient::sendCounters(char *modelWord, unsigned int *counter, bool *counterChanged, bool *needToReconnect)
+void SemIoTGatewayClient::sendCounters(char *modelWord, char *idWord, unsigned int *counter, bool *counterChanged, bool *needToReconnect)
 {
     if (*needToReconnect==true) {
         connectToSemIoTGateway();
@@ -97,6 +98,8 @@ void SemIoTGatewayClient::sendCounters(char *modelWord, unsigned int *counter, b
             if (!_udp->beginPacket(_gatewayIp, _udpPort)) {
                 *needToReconnect=true;
             }
+            memcpy(modelWord,_packet.model,sizeof(_packet.model));
+            memcpy(idWord,_packet.id,sizeof(_packet.id));
             _udp->write(modelWord);
             // TODO: separate to lib:
             _udp->write((*counter >> 24) & 0xFF);

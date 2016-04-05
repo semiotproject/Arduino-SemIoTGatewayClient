@@ -39,3 +39,7 @@ From [https://github.com/thijse/Arduino-EEPROMEx](https://github.com/thijse/Ardu
 ## Energomera CE102
 
 From [https://github.com/semiotproject/Energomera-CE102-lib.git](https://github.com/semiotproject/Energomera-CE102-lib.git)
+
+## Examples
+
+Take a loot at [SemIoT device prototype examples]
