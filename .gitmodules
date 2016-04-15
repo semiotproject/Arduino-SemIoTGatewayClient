@@ -1,3 +1,6 @@
 [submodule "EnergomeraCE102"]
 	path = EnergomeraCE102
 	url = https://github.com/semiotproject/Energomera-CE102-lib.git
+[submodule "microcoap"]
+	path = microcoap
+	url = https://github.com/semiotproject/microcoap.git

@@ -14,9 +14,8 @@ extern "C"
 
 #define DEBUG_LED_LIGHT LOW
 #define DEBUG_LED_DARK HIGH
-
-// FIXME: custom C++11 funtion not HardwareSerial pointer
-    void connectToWPS(HardwareSerial *_debugSerial=0, int _debugLedPin=-1);
+    void connectToWiFi();
+    void connectToWPS();
 #endif
 
 #endif /* WIFIEX_H */

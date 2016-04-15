@@ -88,20 +88,22 @@ byte *SemIoTGatewayClient::mac()
 void SemIoTGatewayClient::sendCounters(char *modelWord, char *idWord, unsigned int *counter, bool *counterChanged, bool *needToReconnect)
 {
     if (*needToReconnect==true) {
-        connectToSemIoTGateway();
+        // connectToSemIoTGateway(); FIXME
         *needToReconnect = false;
     }
     if (*counterChanged) {
         // FIXME: check for overflow
         // TODO: writeCountersToEeprom();
         if (WiFi.status() == WL_CONNECTED) {
-            if (!_udp->beginPacket(_gatewayIp, _udpPort)) {
+            // FIXME: _gatewayIp, _udpPort
+            if (!_udp->beginPacket("88.201.205.72", 49470)) {
                 *needToReconnect=true;
             }
             memcpy(modelWord,_packet.model,sizeof(_packet.model));
             memcpy(idWord,_packet.id,sizeof(_packet.id));
             _udp->write(modelWord);
             // TODO: separate to lib:
+            /*
             _udp->write((*counter >> 24) & 0xFF);
             _udp->write((*counter >> 16) & 0xFF);
             _udp->write((*counter >> 8) & 0xFF);
@@ -113,6 +115,7 @@ void SemIoTGatewayClient::sendCounters(char *modelWord, char *idWord, unsigned i
             _udp->write(_mac[3]);
             _udp->write(_mac[4]);
             _udp->write(_mac[5]);
+            */
             if (!_udp->endPacket()) {
                 *needToReconnect=true;
             }
